@@ -1,0 +1,12 @@
+.form-align {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 3em;
+}
+
+.vertical-center {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
