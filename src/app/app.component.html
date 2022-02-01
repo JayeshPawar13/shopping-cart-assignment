@@ -40,10 +40,12 @@
             Products
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li *ngFor="let item of categories" class="dropdown-item">
+              <span (click)="navigateToCategory(item.id)"
+                >{{ item.name }}
+                <hr class="dropdown-divider"
+              /></span>
+            </li>
           </ul>
         </li>
       </ul>
@@ -64,17 +66,87 @@
               Register
             </button>
           </div>
-          <button class="btn btn-light cart-align" type="button">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             <img src="../assets/static/images/cart.svg" alt="" srcset="" /><span
-              >Item</span
+              >{{ cartItems.length }} Item</span
             >
           </button>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    My Cart ({{ cartItems.length }} Item)
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div *ngFor="let item of cartItems">
+                    <div *ngIf="item.length" class="cart-item-align">
+                      <img
+                        class="vertical-align"
+                        [src]="item[0].imageURL"
+                        alt=""
+                      />
+                      <div class="vertical-align">
+                        <h6>{{ item[0].name }}</h6>
+                        <div>
+                          <button class="btn" (click)="item.pop()">-</button>
+                          {{ item.length }}
+                          <button class="btn" (click)="item.push(item[0])">
+                            +
+                          </button>
+                          <span> x {{ item[0].price }}</span>
+                        </div>
+                      </div>
+                      <p class="vertical-align">
+                        Rs.{{ item.length * item[0].price }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary cart-button">
+                    Proceed to checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<div class="outlet">
+  <div class="sidenav">
+    <ul aria-labelledby="navbarDropdown">
+      <li *ngFor="let item of categories" class="dropdown-item">
+        <span (click)="navigateToCategory(item.id)">{{ item.name }} </span>
+        <hr class="dropdown-divider" />
+      </li>
+    </ul>
+  </div>
+  <router-outlet></router-outlet>
+</div>
+
 <div class="footer">
   Copyright &copy; 2011-2022 Sabka Bazaar Grocery Supplies Pvt Ltd
 </div>

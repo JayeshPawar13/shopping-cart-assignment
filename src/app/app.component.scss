@@ -7,3 +7,44 @@
   text-align: center;
   background-color: lightgray;
 }
+
+.cart-item-align {
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1em;
+}
+
+.modal-header {
+  background-color: black;
+  color: white;
+}
+
+.cart-button {
+  width: 100%;
+}
+
+.modal-body {
+  background-color: #fafafa;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.outlet {
+  display: flex;
+}
+
+.sidenav {
+  background-color: lightgray;
+}
+
+@media screen and (max-width: 768px) {
+  .sidenav {
+    display: none;
+  }
+}
+
+.sidenav > ul {
+  padding: 0;
+}

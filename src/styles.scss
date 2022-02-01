@@ -18,3 +18,10 @@ html {
 .form-group {
   margin-bottom: 1em;
 }
+
+.vertical-align {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
