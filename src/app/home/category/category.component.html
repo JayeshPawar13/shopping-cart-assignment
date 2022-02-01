@@ -1,0 +1,11 @@
+<div class="item-align">
+  <div *ngFor="let item of products; index as i" class="product-item">
+    <h6>{{ item.name }}</h6>
+    <img [src]="item.imageURL" alt="" srcset="" />
+    <p>{{ item.description }}</p>
+    <div>
+      <span class="vertical-align">MRP Rs.{{ item.price }}</span>
+      <button class="btn">Buy Now</button>
+    </div>
+  </div>
+</div>
