@@ -9,7 +9,6 @@ import { Categories, Products } from './home/home.interfaces';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent implements OnInit {
   title = 'shopping-cart-assignment';
@@ -24,28 +23,33 @@ export class AppComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.cartService.products.subscribe((res) => {
+      console.log(res);
+
       this.cartItems = [];
+
+      this.products = {};
       res.forEach((item) => {
         if (!this.products[item.id] || !this.products[item.id].length) {
           this.products[item.id] = [];
         }
         (this.products[item.id] as Products[]).push(item);
       });
-
+      console.log(this.products);
       for (const key in this.products) {
         if (Object.prototype.hasOwnProperty.call(this.products, key)) {
           const element = this.products[key];
           this.cartItems.push(element);
         }
       }
+      console.log(this.cartItems);
     });
     this.fetchCategories().subscribe((res) => {
       this.categories = res.sort((item) => item.order);
     });
   }
 
-  navigateToLoginRegistration() {
-    this.router.navigate(['/login-registration']);
+  navigateToRegistration(type: string) {
+    this.router.navigate(['/login-registration', type]);
   }
 
   navigateHome() {

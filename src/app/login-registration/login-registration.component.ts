@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login-registration',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login-registration.component.scss'],
 })
 export class LoginRegistrationComponent implements OnInit {
-  constructor() {}
+  type!: string | null;
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe(() => {
+      this.type = this.route.snapshot.paramMap.get('type');
+    });
+  }
 }

@@ -1,7 +1,8 @@
 .form-align {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 3em;
+  flex-basis: 100%;
+  margin: 3em;
 }
 
 .vertical-center {
@@ -9,4 +10,8 @@
   justify-content: center;
   align-content: center;
   flex-direction: column;
+}
+
+.form-type {
+  margin: 2em;
 }
