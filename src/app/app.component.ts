@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   products: any = {};
   cartItems: Products[][] = [];
   categories: Categories[] = [];
+  total: number = 0;
 
   constructor(
     private router: Router,
@@ -41,7 +42,7 @@ export class AppComponent implements OnInit {
           this.cartItems.push(element);
         }
       }
-      console.log(this.cartItems);
+      this.calculateTotal();
     });
     this.fetchCategories().subscribe((res) => {
       this.categories = res.sort((item) => item.order);
@@ -64,5 +65,14 @@ export class AppComponent implements OnInit {
 
   navigateToCategory(key: string) {
     this.router.navigate(['/category', key]);
+  }
+
+  calculateTotal() {
+    this.total = 0;
+    this.cartItems.forEach((element) => {
+      if (element[0]) {
+        this.total += element.length * element[0].price;
+      }
+    });
   }
 }

@@ -67,7 +67,9 @@ li.nav-item {
 }
 
 .proceed-to-checkout {
+  display: flex;
   flex-basis: 100%;
+  justify-content: space-around;
 }
 
 .modal-body > span {
