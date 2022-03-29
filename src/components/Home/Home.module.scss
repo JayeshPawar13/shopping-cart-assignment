@@ -1,0 +1,10 @@
+.category {
+  display: flex;
+  justify-content: space-between;
+  height: 150px;
+  margin: 4em;
+}
+
+.category:nth-child(even) {
+  flex-direction: row-reverse;
+}
