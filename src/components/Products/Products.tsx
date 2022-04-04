@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { addToCart } from '../../actions/actioncreators';
 import styles from './Products.module.scss';
 
 interface Product {
@@ -16,6 +18,7 @@ interface Product {
 
 function Products() {
   let { id } = useParams();
+  const dispatch = useDispatch();
   const [products, setProducts] = useState<Product[]>([]);
   console.log(id);
   useEffect(() => {
@@ -39,7 +42,10 @@ function Products() {
               />
               <p>{product.description}</p>
             </div>
-            <button className="btn btn-primary">
+            <button
+              className="btn btn-primary"
+              onClick={() => dispatch(addToCart(product))}
+            >
               Buy Now @{product.price}
             </button>
           </div>
