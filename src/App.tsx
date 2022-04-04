@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { addToCart, removeFromCart } from './actions/actioncreators';
 import './App.scss';
 import logo from './assets/static/images/logo.png';
 import Home from './components/Home/Home';
@@ -86,32 +87,7 @@ function App() {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">
-                {store.length ? (
-                  <div style={{ display: 'flex' }}>
-                    <img
-                      src="https://static.onecms.io/wp-content/uploads/sites/9/2021/06/22/different-types-of-tea-FT-BLOG0621.jpg"
-                      width="90px"
-                      height="90px"
-                      alt=""
-                    />
-                    <div>
-                      <h2>title</h2>
-                      <span
-                        style={{
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                        }}
-                      >
-                        <button>-</button>1<button>+</button>x Rs187
-                        <div>Rs 187</div>
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <h2>No items</h2>
-                )}
-              </div>
+              <div className="modal-body">{CartRender()}</div>
               <div className="modal-footer">
                 <button
                   type="button"
@@ -119,6 +95,7 @@ function App() {
                   style={{
                     display: 'flex',
                     justifyContent: 'space-between',
+
                     width: '100%',
                   }}
                 >
@@ -151,6 +128,68 @@ function App() {
         Copyright 2011-2022 Sabka Bazaar Grocery Supplies Pvt Ltd.
       </div>
     </>
+  );
+}
+
+function CartRender() {
+  const dispatch = useDispatch();
+  const store = useSelector((store: any[]) => store);
+  const cartItems = Array.from(new Set(store)).map((item: any, index) => {
+    return (
+      <>
+        <div
+          style={{
+            display: 'flex',
+          }}
+          key={index}
+          className="my-2"
+        >
+          <img
+            src={require(`../src/assets/static/images/products/${item.imageURL}`)}
+            width="90px"
+            height="90px"
+            alt=""
+          />
+          <div>
+            <h6 className="mx-3">{item.name}</h6>
+            <div
+              style={{
+                display: 'flex',
+              }}
+            >
+              <i
+                className="fa-solid fa-circle-minus mx-3 my-1"
+                onClick={() => dispatch(removeFromCart(item))}
+              ></i>
+              {store.filter((unique: any) => unique.id === item.id).length}
+              <i
+                className="fa-solid fa-circle-plus mx-3 my-1"
+                onClick={() => dispatch(addToCart(item))}
+              ></i>
+              <span className="mx-3">x</span>
+              <span className="mx-3">Rs.{item.price}</span>
+            </div>
+          </div>
+          <div className="my-4 mx-5">
+            Rs.
+            {item.price *
+              store.filter((unique: any) => unique.id === item.id).length}
+          </div>
+        </div>
+      </>
+    );
+  });
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
+      }}
+    >
+      {cartItems.length ? cartItems : <h3>No items</h3>}
+    </div>
   );
 }
 
