@@ -1,8 +1,12 @@
 .productList {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .product {
   margin: 2em;
-  width: 700px;
+  width: 300px;
 }

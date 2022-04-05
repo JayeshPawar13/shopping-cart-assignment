@@ -24,9 +24,13 @@ function Products() {
   useEffect(() => {
     axios.get(`http://localhost:3003/products`).then((response) => {
       console.log(response.data);
-      setProducts(
-        response.data.filter((product: Product) => product.category === id)
-      );
+      if (id) {
+        setProducts(
+          response.data.filter((product: Product) => product.category === id)
+        );
+      } else {
+        setProducts(response.data);
+      }
     });
   }, [id]);
   return (
@@ -34,19 +38,30 @@ function Products() {
       {products.map((product) => {
         return (
           <div key={product.id} className={styles.product}>
-            <h5>{product.name}</h5>
-            <div>
+            <h6 style={{ height: '3em' }}>{product.name}</h6>
+            <div
+              style={{ display: 'flex', width: '300px', marginBottom: '1em' }}
+            >
               <img
                 src={require(`../../assets/static/images/products/${product.imageURL}`)}
                 alt=""
+                height="150px"
+                width="100px"
               />
-              <p>{product.description}</p>
+              <p
+                style={{
+                  backgroundColor: 'gainsboro',
+                  fontSize: '12px',
+                }}
+              >
+                {product.description}
+              </p>
             </div>
             <button
-              className="btn btn-primary"
+              className="btn btn-block"
               onClick={() => dispatch(addToCart(product))}
             >
-              Buy Now @{product.price}
+              Buy Now @ Rs.{product.price}
             </button>
           </div>
         );

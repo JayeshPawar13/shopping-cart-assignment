@@ -99,7 +99,10 @@ function Home() {
               console.log(category);
 
               return (
-                <div key={category.id} className={styles.category}>
+                <div
+                  key={category.id}
+                  className={`${styles.category} shadow-sm p-3 mb-5 bg-white rounded`}
+                >
                   <img
                     src={require(`../../assets/static/images/category/${category.imageUrl}`)}
                     width="300px"
@@ -114,7 +117,7 @@ function Home() {
                     <h2>{category.name}</h2>
                     <p>{category.description}</p>
                     <button
-                      className="btn btn-primary"
+                      className="btn"
                       onClick={() => navigate(`/product/${category.id}`)}
                     >
                       Explore {category.name}

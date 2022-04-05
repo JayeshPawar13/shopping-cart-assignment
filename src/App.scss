@@ -10,6 +10,10 @@
   height: 70px;
 }
 
+.nav-link {
+  padding-left: 10%;
+}
+
 .footer {
   background-color: lightgrey;
   text-align: center;
@@ -17,4 +21,16 @@
 
 .navbar-collapse {
   justify-content: space-between;
+}
+
+.modal-footer {
+  justify-content: center;
+}
+
+.fa-shopping-cart {
+  color: rgb(197, 24, 82);
+}
+
+.cart-align {
+  padding-right: 10%;
 }

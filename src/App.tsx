@@ -9,8 +9,7 @@ import Login from './components/Login/Login';
 import Products from './components/Products/Products';
 import Register from './components/Register/Register';
 function App() {
-  const store = useSelector((store: []) => store);
-  console.log(store);
+  const store = useSelector((store: any[]) => store);
 
   return (
     <>
@@ -23,8 +22,8 @@ function App() {
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarText"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarText"
             aria-controls="navbarText"
             aria-expanded="false"
             aria-label="Toggle navigation"
@@ -40,13 +39,13 @@ function App() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/home'} className="nav-link">
+                  <Link to={'/products'} className="nav-link">
                     Products
                   </Link>
                 </li>
               </ul>
             </div>
-            <div>
+            <div className="cart-align">
               <div style={{ display: 'flex' }}>
                 <Link to={'/'} className="nav-link">
                   <span style={{ fontSize: '12px' }}>SignIn</span>
@@ -56,12 +55,13 @@ function App() {
                 </Link>
               </div>
               <button
-                className="btn btn-primary"
+                className="btn"
+                style={{ backgroundColor: '#ccc' }}
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                onClick={() => console.log(store)}
               >
-                <i className="fas fa-shopping-cart"></i> {store.length} Items
+                <i className="fas fa-shopping-cart"></i>{' '}
+                <span style={{ color: 'black' }}>{store.length} Items</span>
               </button>
             </div>
           </div>
@@ -76,22 +76,30 @@ function App() {
         >
           <div className="modal-dialog">
             <div className="modal-content">
-              <div className="modal-header">
+              <div className="modal-header bg-dark text-white">
                 <h5 className="modal-title" id="exampleModalLabel">
                   My Cart
                 </h5>
                 <button
                   type="button"
-                  className="btn-close"
+                  className="btn-close btn-close-white"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">{CartRender()}</div>
+              <div className="modal-body">
+                {CartRender()}
+                <img
+                  src={require('../src/assets/static/images/lowest-price.png')}
+                  alt="Lowest prices"
+                />{' '}
+                You wont find it cheaper anywhere
+              </div>
               <div className="modal-footer">
+                <p>Promo codes can be applied at checkout</p>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn"
                   style={{
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -100,7 +108,13 @@ function App() {
                   }}
                 >
                   <span>Proceed to Checkout</span>
-                  <span>Rs 100</span>
+                  <span>
+                    Rs.
+                    {store.length
+                      ? store.reduce((acc, curr) => acc + curr.price, 0)
+                      : 0}{' '}
+                    <i className="fa-solid fa-angle-right"></i>
+                  </span>
                 </button>
               </div>
             </div>
@@ -134,6 +148,7 @@ function App() {
 function CartRender() {
   const dispatch = useDispatch();
   const store = useSelector((store: any[]) => store);
+
   const cartItems = Array.from(new Set(store)).map((item: any, index) => {
     return (
       <>

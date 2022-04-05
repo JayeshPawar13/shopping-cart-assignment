@@ -11,7 +11,7 @@ function Register() {
   return (
     <div className={styles.Register}>
       <div>
-        <h1>Register</h1>
+        <h3>Register</h3>
         <p>Get access to your Orders, Wishlist and Recommendations</p>
       </div>
       <form
@@ -100,7 +100,7 @@ function Register() {
             <p style={{ color: 'red' }}>{errors.PasswordConfirm.message}</p>
           )}
         </span>
-        <button className="btn btn-success my-3">Signup</button>
+        <button className="btn btn-block my-3">Signup</button>
       </form>
     </div>
   );

@@ -11,7 +11,7 @@ function Login() {
   return (
     <div className={styles.Login}>
       <div>
-        <h1>Login</h1>
+        <h3>Login</h3>
         <p>Get access to your Orders, Wishlist and Recommendations</p>
       </div>
       <form
@@ -52,7 +52,7 @@ function Login() {
             <p style={{ color: 'red' }}>{errors.Password.message}</p>
           )}
         </span>
-        <button className="btn btn-success my-3">Login</button>
+        <button className="btn btn-block my-3">Login</button>
       </form>
     </div>
   );
