@@ -34,3 +34,15 @@
 .cart-align {
   padding-right: 10%;
 }
+
+.cart-items {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.cart-proceed-btn {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}

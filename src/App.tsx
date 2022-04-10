@@ -1,13 +1,13 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import { addToCart, removeFromCart } from './actions/actioncreators';
-import './App.scss';
-import logo from './assets/static/images/logo.png';
-import Home from './components/Home/Home';
-import Login from './components/Login/Login';
-import Products from './components/Products/Products';
-import Register from './components/Register/Register';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { addToCart, removeFromCart } from "./actions/actioncreators";
+import "./App.scss";
+import logo from "./assets/static/images/logo.png";
+import Home from "./components/Home/Home";
+import Login from "./components/Login/Login";
+import Products from "./components/Products/Products";
+import Register from "./components/Register/Register";
 function App() {
   const store = useSelector((store: any[]) => store);
 
@@ -15,7 +15,7 @@ function App() {
     <>
       <BrowserRouter>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link to={'/'} className="nav-link">
+          <Link to={"/"} className="nav-link">
             <img className="navbar-brand" src={logo} alt="" />
           </Link>
 
@@ -34,34 +34,34 @@ function App() {
             <div>
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link to={'/home'} className="nav-link">
+                  <Link to={"/home"} className="nav-link">
                     Home
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to={'/products'} className="nav-link">
+                  <Link to={"/products"} className="nav-link">
                     Products
                   </Link>
                 </li>
               </ul>
             </div>
             <div className="cart-align">
-              <div style={{ display: 'flex' }}>
-                <Link to={'/'} className="nav-link">
-                  <span style={{ fontSize: '12px' }}>SignIn</span>
+              <div style={{ display: "flex" }}>
+                <Link to={"/"} className="nav-link">
+                  <span className="sign-in">SignIn</span>
                 </Link>
-                <Link to={'/register'} className="nav-link">
-                  <span style={{ fontSize: '12px' }}>Register</span>
+                <Link to={"/register"} className="nav-link">
+                  <span className="sign-in">Register</span>
                 </Link>
               </div>
               <button
                 className="btn"
-                style={{ backgroundColor: '#ccc' }}
+                style={{ backgroundColor: "#ccc" }}
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
               >
-                <i className="fas fa-shopping-cart"></i>{' '}
-                <span style={{ color: 'black' }}>{store.length} Items</span>
+                <i className="fas fa-shopping-cart"></i>{" "}
+                <span style={{ color: "black" }}>{store.length} Items</span>
               </button>
             </div>
           </div>
@@ -90,29 +90,20 @@ function App() {
               <div className="modal-body">
                 {CartRender()}
                 <img
-                  src={require('../src/assets/static/images/lowest-price.png')}
+                  src={require("../src/assets/static/images/lowest-price.png")}
                   alt="Lowest prices"
-                />{' '}
+                />{" "}
                 You wont find it cheaper anywhere
               </div>
               <div className="modal-footer">
                 <p>Promo codes can be applied at checkout</p>
-                <button
-                  type="button"
-                  className="btn"
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-
-                    width: '100%',
-                  }}
-                >
+                <button type="button" className="btn cart-proceed-btn">
                   <span>Proceed to Checkout</span>
                   <span>
                     Rs.
                     {store.length
                       ? store.reduce((acc, curr) => acc + curr.price, 0)
-                      : 0}{' '}
+                      : 0}{" "}
                     <i className="fa-solid fa-angle-right"></i>
                   </span>
                 </button>
@@ -154,7 +145,7 @@ function CartRender() {
       <>
         <div
           style={{
-            display: 'flex',
+            display: "flex",
           }}
           key={index}
           className="my-2"
@@ -169,7 +160,7 @@ function CartRender() {
             <h6 className="mx-3">{item.name}</h6>
             <div
               style={{
-                display: 'flex',
+                display: "flex",
               }}
             >
               <i
@@ -196,13 +187,7 @@ function CartRender() {
   });
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexDirection: 'column',
-      }}
-    >
+    <div className="cart-items">
       {cartItems.length ? cartItems : <h3>No items</h3>}
     </div>
   );

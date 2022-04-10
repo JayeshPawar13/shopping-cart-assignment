@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import firstSlide from '../../assets/static/images/offers/offer1.jpg';
-import secondSlide from '../../assets/static/images/offers/offer2.jpg';
-import thirdSlide from '../../assets/static/images/offers/offer3.jpg';
-import styles from './Home.module.scss';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import firstSlide from "../../assets/static/images/offers/offer1.jpg";
+import secondSlide from "../../assets/static/images/offers/offer2.jpg";
+import thirdSlide from "../../assets/static/images/offers/offer3.jpg";
+import styles from "./Home.module.scss";
 
 interface Categories {
   description: string;
@@ -20,7 +20,7 @@ function Home() {
   const [categoriesData, setCategoriesData] = useState<Categories[]>([]);
   const navigate = useNavigate();
   useEffect(() => {
-    axios.get(`http://localhost:3003/categories`).then((response) => {
+    axios.get(`http://localhost:4200/categories`).then((response) => {
       console.log(response.data);
       setCategoriesData(response.data);
     });
@@ -108,12 +108,7 @@ function Home() {
                     width="300px"
                     alt=""
                   />
-                  <div
-                    style={{
-                      flexBasis: '600px',
-                      textAlign: 'center',
-                    }}
-                  >
+                  <div className={styles.categoryCard}>
                     <h2>{category.name}</h2>
                     <p>{category.description}</p>
                     <button

@@ -1,9 +1,9 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { addToCart } from '../../actions/actioncreators';
-import styles from './Products.module.scss';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addToCart } from "../../actions/actioncreators";
+import styles from "./Products.module.scss";
 
 interface Product {
   category: string;
@@ -22,7 +22,7 @@ function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   console.log(id);
   useEffect(() => {
-    axios.get(`http://localhost:3003/products`).then((response) => {
+    axios.get(`http://localhost:4200/products`).then((response) => {
       console.log(response.data);
       if (id) {
         setProducts(
@@ -38,9 +38,9 @@ function Products() {
       {products.map((product) => {
         return (
           <div key={product.id} className={styles.product}>
-            <h6 style={{ height: '3em' }}>{product.name}</h6>
+            <h6 style={{ height: "3em" }}>{product.name}</h6>
             <div
-              style={{ display: 'flex', width: '300px', marginBottom: '1em' }}
+              style={{ display: "flex", width: "300px", marginBottom: "1em" }}
             >
               <img
                 src={require(`../../assets/static/images/products/${product.imageURL}`)}
@@ -50,8 +50,8 @@ function Products() {
               />
               <p
                 style={{
-                  backgroundColor: 'gainsboro',
-                  fontSize: '12px',
+                  backgroundColor: "gainsboro",
+                  fontSize: "12px",
                 }}
               >
                 {product.description}
